@@ -1,3 +1,6 @@
+from math import sqrt
+
+
 class Calculator:
     def __init__(self, init_value=0):
         self.value = init_value
@@ -23,6 +26,18 @@ class Calculator:
         self.value -= sum(args)
         return self
 
+    def power(self, *args):
+        for power in args:
+            if power == 0:
+                return 0
+            for i in range(power):
+                self.value = self.value * self.value
+        return self
+
+    def root(self):
+        self.value = sqrt(self.value)
+        return self
+
     def __repr__(self):
         return self.value
 
@@ -38,7 +53,7 @@ if __name__ == '__main__':
     calculator = Calculator(100)
     print(calculator)
     print(calculator.add(1, 2, 3, 5.1).multiply(4, 0.123).subtract(4, 1, -100).divide(5, integer_divide=True))
-    print(Calculator(100) + 10)
-    print(10 + Calculator(12))
-    print(Calculator(123) - Calculator(14))
-    print(Calculator(14) / Calculator(2))
+    # print(Calculator(100) + 10)
+    # print(10 + Calculator(12))
+    # print(Calculator(123) - Calculator(14))
+    # print(Calculator(14) / Calculator(2))

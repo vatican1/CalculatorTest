@@ -1,5 +1,6 @@
 import unittest
 from simple_calculator import Calculator, fun
+from math import pow, sqrt
 
 
 class TestCalculator(unittest.TestCase):
@@ -20,12 +21,23 @@ class TestCalculator(unittest.TestCase):
 
     def test_divide(self):
         calc_value = self.calculator.value
-        self.assertEquals(self.calculator.divide(2, 3).value, calc_value / 6)
+        self.assertEqual(self.calculator.divide(2, 3).value, calc_value / 6)
 
-    def test_file_read(self):
-        with open('file.txt', 'r') as f:
-            text = f.read()
-            self.assertEquals(fun(text), text[::-1])
+    def test_subtract(self):
+        calc_value = self.calculator.value
+        self.assertEqual(self.calculator.subtract(1, 2).value, calc_value - (1 + 2))
+
+    def test_power(self):
+        calc_value = self.calculator.value
+        self.assertEqual(self.calculator.power(1, 2).value, pow(calc_value, 2))
+
+    def test_root(self):
+        calc_value = self.calculator.value
+        self.assertEqual(self.calculator.root().value, sqrt(calc_value))
+    # def test_file_read(self):
+    #     with open('file.txt', 'r') as f:
+    #         text = f.read()
+    #         self.assertEqual(fun(text), text[::-1])
 
     def kek(self):
         self.assertEqual(1, 2)
@@ -33,5 +45,3 @@ class TestCalculator(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
-
-
