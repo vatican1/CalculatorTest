@@ -29,7 +29,8 @@ class Calculator:
     def power(self, *args):
         for power in args:
             if power == 0:
-                return 1
+                self.value = 1
+                return self
             self.value = self.value ** power
         return self
 

@@ -1,14 +1,15 @@
-import unittest
+import unittest, datetime
 from simple_calculator import Calculator, fun
 from math import sqrt
-from random import random
+from random import randint
 
 
 class TestCalculator(unittest.TestCase):
     def setUp(self):
-        self.calculator = Calculator(1)
+        self.calculator = Calculator(randint(0, 100))
 
     def test_add(self):
+        print('Start: ' + str(datetime.datetime.now().second) + ' ' + str(datetime.datetime.now().microsecond))
         """
         Test add function with regular data
         :rtype: object
@@ -45,17 +46,16 @@ class TestCalculator(unittest.TestCase):
 
     def test_power(self):
         calc_value = self.calculator.value
-        self.assertEqual(self.calculator.power(1, 2).value, calc_value**2)
+        self.assertEqual(self.calculator.power(1, 2).value, calc_value ** 2)
 
     def test_zero_power(self):
         self.calculator = 10
-        calc_value = self.calculator.value
-        self.assertEqual(self.calculator.power(1, 0, 2).value, 1)
+        self.assertEqual(self.calculator.power(1, 2, 0 ).value, 1)
 
     def test_negative_power(self):
         self.calculator.value = 10
         calc_value = self.calculator.value
-        self.assertEqual(self.calculator.power(-1, -2).value, calc_value**2)
+        self.assertEqual((self.calculator.power(-1, -2).value + 1) // 1, calc_value ** 2)
 
     def test_root(self):
         calc_value = self.calculator.value
@@ -65,11 +65,15 @@ class TestCalculator(unittest.TestCase):
         self.calculator.value = 0
         calc_value = self.calculator.value
         self.assertEqual(self.calculator.root().value, 0)
+        print('End: ' + str(datetime.datetime.now().second) + ' ' + str(datetime.datetime.now().microsecond))
 
-    # def test_file_read(self):
-    #     with open('file.txt', 'r') as f:
-    #         text = f.read()
-    #         self.assertEqual(fun(text), text[::-1])
+    def test_all(self):
+        self.calculator.value = 40
+        calc_value = self.calculator.value
+        self.assertEqual(self.calculator.add(3, 5, 6, 9, self=self.calculator.power(5, self=(self.calculator.root()))).value,
+                         sqrt(calc_value)**5+3+5+6+9)
+#3+5+6+9+( (sqrt(value))^5)
+
 
     def kek(self):
         self.assertEqual(1, 2)
